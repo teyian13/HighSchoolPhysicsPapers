@@ -1,6 +1,6 @@
 import os
 
-directory = '高考备考/高考真题/2020/'
+directory = '高考备考/高考真题/2021/'
 
 for filename in os.listdir(directory):
     if filename.endswith('.md'):
