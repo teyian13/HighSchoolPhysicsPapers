@@ -18,6 +18,9 @@ for filename in os.listdir(directory):
         # 如何替换英文的括号为中文的括号
         content = content.replace('(', '（')
         content = content.replace(')', '）')
+        content = content.replace('（　　）', '$（\qquad）$')
+        content = content.replace('（\n  ）', '$（\qquad）$')
+        content = content.replace('（  ）', '$（\qquad）$')
 
 
         # 把处理后的字符串写回文件
