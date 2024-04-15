@@ -21,6 +21,8 @@ for filename in os.listdir(directory):
         content = content.replace('（　　）', '$（\qquad）$')
         content = content.replace('（\n  ）', '$（\qquad）$')
         content = content.replace('（  ）', '$（\qquad）$')
+        content = content.replace('left（', 'left(')
+        content = content.replace('right）', 'right)')
 
 
         # 把处理后的字符串写回文件
