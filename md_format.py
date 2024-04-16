@@ -15,6 +15,7 @@ for filename in os.listdir(directory):
         content = content.replace(',', '，')
         content = content.replace(';', '；')
         content = content.replace(' ', '')
+        content = content.replace(' ', '')
         content = content.replace('．', '.')
 
         # \n
