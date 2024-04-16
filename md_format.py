@@ -11,6 +11,10 @@ for filename in os.listdir(directory):
         with open(filepath, 'r', encoding='utf-8') as md_file:
             content = md_file.read()
 
+        content = content.replace('（    ）', '$（\qquad）$')
+        content = content.replace('（\n   ）', '$（\qquad）$')
+        content = content.replace('（\n  ）', '$（\qquad）$')
+
         # 如何替换英文的逗号和句号为中文的逗号和句号
         content = content.replace(',', '，')
         content = content.replace(';', '；')
@@ -19,22 +23,13 @@ for filename in os.listdir(directory):
         content = content.replace(' ', '')
         content = content.replace('．', '.')
 
-        # \n
-        content = content.replace('\n\n', '\n')
-        content = content.replace('\n\n', '\n')
-        content = content.replace('\n', '\n\n')
-
         # 如何替换英文的括号为中文的括号
         content = content.replace('(', '（')
         content = content.replace(')', '）')
-        content = content.replace('（　　）', '$（\qquad）$')
-        content = content.replace('（\n  ）', '$（\qquad）$')
-        content = content.replace('（  ）', '$（\qquad）$')
         content = content.replace('left（', 'left(')
         content = content.replace('right）', 'right)')
         content = content.replace('[          ]{.underline}', '____')
         content = content.replace('$$', '$')
-        content = content.replace('\n$\n', '\n$$\n')
         content = content.replace('\\text{', '\\mathrm{')
         content = content.replace('![]（', '![](')
         content = content.replace('.png）', '.png)')
@@ -42,7 +37,6 @@ for filename in os.listdir(directory):
 
         
         content = re.sub(r'\$([ABCD]+)\$', r'\1', content)
-
         # mathpix
         
         content = content.replace('Ω', '\ohm')
@@ -55,6 +49,7 @@ for filename in os.listdir(directory):
         content = content.replace('\Delta', '\Delta ')
         content = content.replace('\pi', '\pi ')
         content = content.replace('\omega', '\omega ')
+        content = content.replace('\\times', '\\times ')
         content = content.replace('#####', '##### ')
         content = content.replace('#202', '# 202')
 
@@ -62,6 +57,11 @@ for filename in os.listdir(directory):
         content = content.replace('【解析】', '【解答】')
         content = content.replace('【解答】解：', '【解答】')
 
+        # \n
+        content = content.replace('\n\n', '\n')
+        content = content.replace('\n\n', '\n')
+        content = content.replace('\n', '\n\n')
+        content = content.replace('\n$\n', '\n$$\n')
 
         # 把处理后的字符串写回文件
         with open(filepath, 'w', encoding='utf-8') as md_file:
