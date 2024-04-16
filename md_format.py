@@ -60,8 +60,15 @@ for filename in os.listdir(directory):
         # \n
         content = content.replace('\n\n', '\n')
         content = content.replace('\n\n', '\n')
-        content = content.replace('\n', '\n\n')
         content = content.replace('\n$\n', '\n$$\n')
+
+        # 仅在行首题号后添加空格
+        # '^' 代表行首， '\d{1,2}' 匹配1到2位的数字
+        content = re.sub(r'^(\d{1,2}\.)', r'\1 ', content, flags=re.MULTILINE)
+
+        # 在每两道题之间添加空行
+        # 注意，此处的 "\n" 其实是为了匹配上一题的结束，所以我们要保留它，即替换为 "\n\n" （两个换行符）
+        content = re.sub(r'(\n)(\d{1,2}\. )', r'\n\1\2', content)
 
         # 把处理后的字符串写回文件
         with open(filepath, 'w', encoding='utf-8') as md_file:
