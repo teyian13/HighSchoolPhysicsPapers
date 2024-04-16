@@ -34,6 +34,7 @@ for filename in os.listdir(directory):
         content = content.replace('right）', 'right)')
         content = content.replace('[          ]{.underline}', '____')
         content = content.replace('$$', '$')
+        content = content.replace('\n$\n', '\n$$\n')
         content = content.replace('\\text{', '\\mathrm{')
         content = content.replace('![]（', '![](')
         content = content.replace('.png）', '.png)')
