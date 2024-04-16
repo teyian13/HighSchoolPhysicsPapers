@@ -15,6 +15,12 @@ for filename in os.listdir(directory):
         content = content.replace(',', '，')
         content = content.replace(';', '；')
         content = content.replace(' ', '')
+        content = content.replace('．', '.')
+
+        # \n
+        content = content.replace('\n\n', '\n')
+        content = content.replace('\n\n', '\n')
+        content = content.replace('\n', '\n\n')
 
         # 如何替换英文的括号为中文的括号
         content = content.replace('(', '（')
@@ -27,6 +33,9 @@ for filename in os.listdir(directory):
         content = content.replace('[          ]{.underline}', '____')
         content = content.replace('$$', '$')
         content = content.replace('\\text{', '\\mathrm{')
+        content = content.replace('![]（', '![](')
+        content = content.replace('.png）', '.png)')
+        content = re.sub(r'\$([ABCD]+)\$', r'\1', content)
 
 
         # +空格
@@ -38,6 +47,7 @@ for filename in os.listdir(directory):
         content = content.replace('\pi', '\pi ')
         content = content.replace('\omega', '\omega ')
         content = content.replace('#####', '##### ')
+        content = content.replace('#202', '# 202')
 
 
         # 把处理后的字符串写回文件
