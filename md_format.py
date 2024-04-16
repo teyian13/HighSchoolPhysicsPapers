@@ -11,34 +11,35 @@ for filename in os.listdir(directory):
         with open(filepath, 'r', encoding='utf-8') as md_file:
             content = md_file.read()
 
+        # 选择填空 ____
         content = content.replace('（    ）', '$（\qquad）$')
         content = content.replace('（\n   ）', '$（\qquad）$')
         content = content.replace('（\n  ）', '$（\qquad）$')
+        content = content.replace('[          ]{.underline}', '____')
 
-        # 如何替换英文的逗号和句号为中文的逗号和句号
+        # 去除空格
+        content = content.replace(' ', '')
+
+        # 半角➡️全角
         content = content.replace(',', '，')
         content = content.replace(';', '；')
         content = content.replace(':', '：')
-        content = content.replace(' ', '')
         content = content.replace(' ', '')
-        content = content.replace('．', '.')
+        content = content.replace('．', '。')
+        content = content.replace('https：//', 'https://')
 
         # 如何替换英文的括号为中文的括号
         content = content.replace('(', '（')
         content = content.replace(')', '）')
         content = content.replace('left（', 'left(')
         content = content.replace('right）', 'right)')
-        content = content.replace('[          ]{.underline}', '____')
-        content = content.replace('$$', '$')
-        content = content.replace('\\text{', '\\mathrm{')
         content = content.replace('![]（', '![](')
         content = content.replace('.png）', '.png)')
-        content = content.replace('https：//', 'https://')
 
-        
-        content = re.sub(r'\$([ABCD]+)\$', r'\1', content)
         # mathpix
-        
+        content = content.replace('$$', '$')
+        content = content.replace('\\text{', '\\mathrm{')
+        content = re.sub(r'\$([ABCD]+)\$', r'\1', content)
         content = content.replace('Ω', '\ohm')
 
         # +空格
@@ -50,7 +51,6 @@ for filename in os.listdir(directory):
         content = content.replace('\pi', '\pi ')
         content = content.replace('\omega', '\omega ')
         content = content.replace('\\times', '\\times ')
-        content = content.replace('#####', '##### ')
         content = content.replace('#202', '# 202')
 
 
