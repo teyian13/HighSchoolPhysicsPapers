@@ -48,6 +48,8 @@ for filename in os.listdir(directory):
         content = content.replace('\omega', '\omega ')
         content = content.replace('#####', '##### ')
         content = content.replace('#202', '# 202')
+        content = content.replace('【解析】', '【解答】')
+        content = content.replace('【解答】解:', '【解答】')
 
 
         # 把处理后的字符串写回文件
