@@ -14,6 +14,7 @@ for filename in os.listdir(directory):
         # 如何替换英文的逗号和句号为中文的逗号和句号
         content = content.replace(',', '，')
         content = content.replace(';', '；')
+        content = content.replace(':', '：')
         content = content.replace(' ', '')
         content = content.replace(' ', '')
         content = content.replace('．', '.')
@@ -36,8 +37,14 @@ for filename in os.listdir(directory):
         content = content.replace('\\text{', '\\mathrm{')
         content = content.replace('![]（', '![](')
         content = content.replace('.png）', '.png)')
+        content = content.replace('https：//', 'https://')
+
+        
         content = re.sub(r'\$([ABCD]+)\$', r'\1', content)
 
+        # mathpix
+        
+        content = content.replace('Ω', '\ohm')
 
         # +空格
         content = content.replace('\cdot', '\cdot ')
@@ -49,8 +56,10 @@ for filename in os.listdir(directory):
         content = content.replace('\omega', '\omega ')
         content = content.replace('#####', '##### ')
         content = content.replace('#202', '# 202')
+
+
         content = content.replace('【解析】', '【解答】')
-        content = content.replace('【解答】解:', '【解答】')
+        content = content.replace('【解答】解：', '【解答】')
 
 
         # 把处理后的字符串写回文件
