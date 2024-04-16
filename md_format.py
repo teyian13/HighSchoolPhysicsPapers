@@ -26,6 +26,7 @@ for filename in os.listdir(directory):
         content = content.replace('right）', 'right)')
         content = content.replace('[          ]{.underline}', '____')
         content = content.replace('$$', '$')
+        content = content.replace('\\text{', '\\mathrm{')
 
 
         # +空格
@@ -38,8 +39,7 @@ for filename in os.listdir(directory):
         content = content.replace('\omega', '\omega ')
         content = content.replace('#####', '##### ')
 
-        # text mathrm
-        content = re.sub(r'\\text\{([^a-zA-Z0-9\u4E00-\u9FA5\s]+)\}', r'\\mathrm{\1}', content)
+
         # 把处理后的字符串写回文件
         with open(filepath, 'w', encoding='utf-8') as md_file:
             md_file.write(content)
