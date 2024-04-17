@@ -45,14 +45,6 @@ for filename in os.listdir(directory):
         content = content.replace('Ω', '\ohm')
         content = content.replace('\mathrm{/}', '/')
 
-        # mathrm
-        content = content.replace('\mathrm{km}', 'km')
-        content = content.replace( 'km','\mathrm{km}')
-        content = content.replace('\mathrm{kg}', 'kg')
-        content = content.replace( 'kg','\mathrm{kg}')
-
-        
-
         # +空格
         content = content.replace('\cdot', '\cdot ')
         content = content.replace('\sin', '\sin ')
