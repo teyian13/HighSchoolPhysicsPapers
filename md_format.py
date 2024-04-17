@@ -59,11 +59,15 @@ for filename in os.listdir(directory):
         content = content.replace('\\omega', '\\omega ')
         content = content.replace('\\times', '\\times ')
         content = content.replace('\\rho', '\\rho ')
+        content = content.replace('\\approx', '\\approx ')
+        content = content.replace('°', '^\\circ')
 
         # 空格
         content = content.replace('【解析】', '【解答】')
         content = content.replace('【解答】解：', '【解答】')
+        content = content.replace('【解答】解', '【解答】')
         content = content.replace('#202', '# 202')
+        content = content.replace('\：', '')
 
         # \n
         content = content.replace('\n\n', '\n')
