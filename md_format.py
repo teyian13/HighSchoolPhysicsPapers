@@ -40,21 +40,14 @@ for filename in os.listdir(directory):
         content = re.sub(r'\$([ABCD]+)\$', r'\1', content)
         content = content.replace('Ω', '\ohm')
         content = content.replace('\mathrm{/}', '/')
+        content = content.replace('°', '^\\circ')
 
         # +空格
-        content = content.replace('\\cdot', '\\cdot ')
-        content = content.replace('\\sin', '\\sin ')
-        content = content.replace('\\sim', '\\sim ')
-        content = content.replace('\\mu', '\\mu ')
-        content = content.replace('\\geq', '\\geq ')
-        content = content.replace('\\leq', '\\leq ')
-        content = content.replace('\\Delta', '\\Delta ')
-        content = content.replace('\\pi', '\\pi ')
-        content = content.replace('\\omega', '\\omega ')
-        content = content.replace('\\times', '\\times ')
-        content = content.replace('\\rho', '\\rho ')
-        content = content.replace('\\approx', '\\approx ')
-        content = content.replace('°', '^\\circ')
+        keywords_for_space_addition = ['\\cdot', '\\sin', '\\sim', '\\mu', '\\geq', '\\leq', '\\Delta', '\\pi', '\\omega', '\\times', '\\rho', '\\approx', '\\rightarrow', '\\propto','\\triangle','\\angle']
+
+        for keyword in keywords_for_space_addition:
+            content = content.replace(keyword, keyword + ' ')
+
 
         # 空格
         content = content.replace('【解析】', '【解答】')
