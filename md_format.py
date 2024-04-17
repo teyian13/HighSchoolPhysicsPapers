@@ -1,7 +1,7 @@
 import os
 import re
 
-directory = '高考备考/高考真题/2021/'
+directory = '高考备考/高考真题/2023/'
 
 for filename in os.listdir(directory):
     if filename.endswith('.md'):
@@ -16,6 +16,7 @@ for filename in os.listdir(directory):
         content = content.replace('（\n   ）', '$（\qquad）$')
         content = content.replace('（\n  ）', '$（\qquad）$')
         content = content.replace('[          ]{.underline}', '____')
+        content = content.replace('#####', '')
 
         # 去除空格
         content = content.replace(' ', '')
