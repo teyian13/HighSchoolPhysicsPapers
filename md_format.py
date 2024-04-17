@@ -26,6 +26,8 @@ for filename in os.listdir(directory):
         content = content.replace(':', '：')
         content = content.replace(' ', '')
         content = content.replace('．', '。')
+        content = content.replace('“', '"')
+        content = content.replace('”', '"')
         content = content.replace('https：//', 'https://')
 
         # 如何替换英文的括号为中文的括号
@@ -41,6 +43,15 @@ for filename in os.listdir(directory):
         content = content.replace('\\text{', '\\mathrm{')
         content = re.sub(r'\$([ABCD]+)\$', r'\1', content)
         content = content.replace('Ω', '\ohm')
+        content = content.replace('\mathrm{/}', '/')
+
+        # mathrm
+        content = content.replace('\mathrm{km}', 'km')
+        content = content.replace( 'km','\mathrm{km}')
+        content = content.replace('\mathrm{kg}', 'kg')
+        content = content.replace( 'kg','\mathrm{kg}')
+
+        
 
         # +空格
         content = content.replace('\cdot', '\cdot ')
@@ -61,6 +72,9 @@ for filename in os.listdir(directory):
         content = content.replace('\n\n', '\n')
         content = content.replace('\n\n', '\n')
         content = content.replace('\n$\n', '\n$$\n')
+
+        content = re.sub(r"\$.*?\$", lambda x: ' ' + x.group() + ' ', content)
+        content = content.replace(' $$ ', '$$')
 
         # 仅在行首题号后添加空格
         # '^' 代表行首， '\d{1,2}' 匹配1到2位的数字
