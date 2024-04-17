@@ -12,11 +12,9 @@ for filename in os.listdir(directory):
             content = md_file.read()
 
         # 选择填空 ____
-        content = content.replace('（    ）', '$（\qquad）$')
-        content = content.replace('（\n   ）', '$（\qquad）$')
-        content = content.replace('（\n  ）', '$（\qquad）$')
-        content = content.replace('[          ]{.underline}', '____')
-        content = content.replace('#####', '')
+        content = content.replace('（    ）', '$(\qquad)$')
+        content = content.replace('（\n   ）', '$(\qquad)$')
+        content = content.replace('（\n  ）', '$(\qquad)$')
 
         # 去除空格
         content = content.replace(' ', '')
@@ -32,12 +30,8 @@ for filename in os.listdir(directory):
         content = content.replace('https：//', 'https://')
 
         # 如何替换英文的括号为中文的括号
-        content = content.replace('(', '（')
-        content = content.replace(')', '）')
-        content = content.replace('left（', 'left(')
-        content = content.replace('right）', 'right)')
-        content = content.replace('![]（', '![](')
-        content = content.replace('.png）', '.png)')
+        content = content.replace( '（','(',)
+        content = content.replace( '）',')',)
 
         # mathpix
         content = content.replace('$$', '$')
