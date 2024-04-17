@@ -1,7 +1,7 @@
 import os
 import re
 
-directory = '高考备考/高考真题/2024/'
+directory = '高考备考/高考真题/2023/'
 
 for filename in os.listdir(directory):
     if filename.endswith('.md'):
@@ -41,6 +41,7 @@ for filename in os.listdir(directory):
 
         # mathpix
         content = content.replace('$$', '$')
+        content = content.replace('\n$\n', '\n$$\n')
         content = content.replace('\\text{', '\\mathrm{')
         content = re.sub(r'\$([ABCD]+)\$', r'\1', content)
         content = content.replace('Ω', '\ohm')
@@ -56,6 +57,7 @@ for filename in os.listdir(directory):
         content = content.replace('\omega', '\omega ')
         content = content.replace('\\times', '\\times ')
         content = content.replace('#202', '# 202')
+        content = content.replace('\\rho', '\\rho ')
 
 
         content = content.replace('【解析】', '【解答】')
@@ -64,7 +66,7 @@ for filename in os.listdir(directory):
         # \n
         content = content.replace('\n\n', '\n')
         content = content.replace('\n\n', '\n')
-        content = content.replace('\n$\n', '\n$$\n')
+
 
         content = re.sub(r"\$.*?\$", lambda x: ' ' + x.group() + ' ', content)
         content = content.replace(' $$ ', '$$')
@@ -72,6 +74,8 @@ for filename in os.listdir(directory):
         # 仅在行首题号后添加空格
         # '^' 代表行首， '\d{1,2}' 匹配1到2位的数字
         content = re.sub(r'^(\d{1,2}\.)', r'\1 ', content, flags=re.MULTILINE)
+        content = re.sub(r'^ \$', '$', content, flags=re.MULTILINE)
+        content = re.sub(r'\$ $', '$', content, flags=re.MULTILINE)
 
         # 在每两道题之间添加空行
         # 注意，此处的 "\n" 其实是为了匹配上一题的结束，所以我们要保留它，即替换为 "\n\n" （两个换行符）
