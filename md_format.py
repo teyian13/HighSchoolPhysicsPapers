@@ -48,20 +48,22 @@ for filename in os.listdir(directory):
         content = content.replace('\mathrm{/}', '/')
 
         # +空格
-        content = content.replace('\cdot', '\cdot ')
-        content = content.replace('\sin', '\sin ')
-        content = content.replace('\mu', '\mu ')
-        content = content.replace('\geq', '\geq ')
-        content = content.replace('\Delta', '\Delta ')
-        content = content.replace('\pi', '\pi ')
-        content = content.replace('\omega', '\omega ')
+        content = content.replace('\\cdot', '\\cdot ')
+        content = content.replace('\\sin', '\\sin ')
+        content = content.replace('\\sim', '\\sim ')
+        content = content.replace('\\mu', '\\mu ')
+        content = content.replace('\\geq', '\\geq ')
+        content = content.replace('\\leq', '\\leq ')
+        content = content.replace('\\Delta', '\\Delta ')
+        content = content.replace('\\pi', '\\pi ')
+        content = content.replace('\\omega', '\\omega ')
         content = content.replace('\\times', '\\times ')
-        content = content.replace('#202', '# 202')
         content = content.replace('\\rho', '\\rho ')
 
-
+        # 空格
         content = content.replace('【解析】', '【解答】')
         content = content.replace('【解答】解：', '【解答】')
+        content = content.replace('#202', '# 202')
 
         # \n
         content = content.replace('\n\n', '\n')
