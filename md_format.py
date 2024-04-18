@@ -12,6 +12,7 @@ for filename in os.listdir(directory):
             content = md_file.read()
 
         # 选择填空 ____
+        content = content.replace('（）', '$(\qquad)$')
         content = content.replace(' ( )', '$(\qquad)$')
         content = content.replace('（    ）', '$(\qquad)$')
         content = content.replace('（\n   ）', '$(\qquad)$')
