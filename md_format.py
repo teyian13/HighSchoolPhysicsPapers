@@ -12,6 +12,7 @@ for filename in os.listdir(directory):
             content = md_file.read()
 
         # 选择填空 ____
+        content = content.replace(' ( )', '$(\qquad)$')
         content = content.replace('（    ）', '$(\qquad)$')
         content = content.replace('（\n   ）', '$(\qquad)$')
         content = content.replace('（\n  ）', '$(\qquad)$')
@@ -58,6 +59,11 @@ for filename in os.listdir(directory):
         # \n
         content = content.replace('\n\n', '\n')
         content = content.replace('\n\n', '\n')
+        content = content.replace('；B', '；\nB')
+        content = content.replace('；C', '；\nC')
+        content = content.replace('；D', '；\nD')
+        content = content.replace('。故选：', '。\n故选：')
+        content = content.replace('；故选：', '。\n故选：')
 
 
         content = re.sub(r"\$.*?\$", lambda x: ' ' + x.group() + ' ', content)
