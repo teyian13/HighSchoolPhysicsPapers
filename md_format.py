@@ -81,6 +81,9 @@ for filename in os.listdir(directory):
 
         content = re.sub(r'^\s*[\w\s]*。\s*', lambda m: m.group().replace('。', '.'), content, flags=re.M)  
 
+        content = content.replace('.png)\nB.', '.png)B.')
+        content = content.replace('.png)\nC.', '.png)C.')
+        content = content.replace('.png)\nD.', '.png)D.')
         # 把处理后的字符串写回文件
         with open(filepath, 'w', encoding='utf-8') as md_file:
             md_file.write(content)
