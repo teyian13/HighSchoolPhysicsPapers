@@ -85,6 +85,12 @@ for filename in os.listdir(directory):
         content = content.replace('.png)\nB.', '.png)B.')
         content = content.replace('.png)\nC.', '.png)C.')
         content = content.replace('.png)\nD.', '.png)D.')
+
+        # 
+        content = content.replace('试卷(等级性)', '试卷（等级性）')
+        content = content.replace('试卷(选择性)', '试卷（选择性）')
+
+        
         # 把处理后的字符串写回文件
         with open(filepath, 'w', encoding='utf-8') as md_file:
             md_file.write(content)
