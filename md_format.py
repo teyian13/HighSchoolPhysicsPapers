@@ -89,6 +89,9 @@ for filename in os.listdir(directory):
         # 
         content = content.replace('试卷(等级性)', '试卷（等级性）')
         content = content.replace('试卷(选择性)', '试卷（选择性）')
+        content = content.replace('试卷(甲卷)', '试卷（甲卷）')
+        content = content.replace('试卷(乙卷)', '试卷（乙卷）')
+        content = content.replace('试卷(新课标)', '试卷（新课标）')
 
         
         # 把处理后的字符串写回文件
