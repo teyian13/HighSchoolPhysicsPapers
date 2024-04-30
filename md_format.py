@@ -87,6 +87,10 @@ for filename in os.listdir(directory):
         content = content.replace('.png)\nC.', '.png)C.')
         content = content.replace('.png)\nD.', '.png)D.')
 
+        content = content.replace('mathrm{~', 'mathrm{')
+        content = content.replace('mathrm{', 'mathrm{~')
+
+        
         # 
         content = content.replace('试卷(等级性)', '试卷（等级性）')
         content = content.replace('试卷(选择性)', '试卷（选择性）')
