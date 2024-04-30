@@ -43,9 +43,10 @@ for filename in os.listdir(directory):
         content = content.replace('Ω', '\Omega')
         content = content.replace('\mathrm{/}', '/')
         content = content.replace('°', '^\\circ')
+        content = content.replace('overparen', 'overset{\\frown}')
 
         # +空格
-        keywords_for_space_addition = ['\\cdot', '\\sin', '\\sim', '\\mu', '\\geq', '\\leq', '\\Delta', '\\pi', '\\omega', '\\times', '\\rho', '\\approx', '\\rightarrow', '\\propto','\\triangle','\\angle','\\hline']
+        keywords_for_space_addition = ['\\nu','\\eta','\\cdot', '\\sin', '\\sim', '\\mu', '\\geq', '\\leq', '\\Delta', '\\pi', '\\omega', '\\times', '\\rho', '\\approx', '\\rightarrow', '\\propto','\\triangle','\\angle','\\hline']
 
         for keyword in keywords_for_space_addition:
             content = content.replace(keyword, keyword + ' ')
