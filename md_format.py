@@ -18,6 +18,7 @@ for filename in os.listdir(directory):
         content = content.replace('（    ）', '$(\qquad)$')
         content = content.replace('（\n   ）', '$(\qquad)$')
         content = content.replace('（\n  ）', '$(\qquad)$')
+        content = content.replace('$(\quad)$', '$(\qquad)$')
 
         # 去除空格
         content = content.replace(' ', '')
