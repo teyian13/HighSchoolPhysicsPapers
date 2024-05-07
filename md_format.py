@@ -33,6 +33,12 @@ for filename in os.listdir(directory):
         content = content.replace('”', '"')
         content = content.replace('https：//', 'https://')
 
+        # 全角➡️半角
+        content = content.replace('１', '1')
+        content = content.replace('３', '3')
+        content = content.replace('４', '4')
+        content = content.replace('５', '5')
+
         # 如何替换英文的括号为中文的括号
         content = content.replace( '（','(',)
         content = content.replace( '）',')',)
