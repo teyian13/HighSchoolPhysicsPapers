@@ -35,6 +35,7 @@ for filename in os.listdir(directory):
 
         # 全角➡️半角
         content = content.replace('１', '1')
+        content = content.replace('２', '2')
         content = content.replace('３', '3')
         content = content.replace('４', '4')
         content = content.replace('５', '5')
@@ -46,7 +47,7 @@ for filename in os.listdir(directory):
         # mathpix
         content = content.replace('\n$\n', '\n$$\n')
         content = content.replace('\\text{', '\\mathrm{')
-        content = re.sub(r'\$([ABCDE]+)\$', r'\1', content)
+        content = re.sub(r'\$([ABCD]+)\$', r'\1', content)
         content = content.replace('Ω', '\Omega')
         content = content.replace('\mathrm{/}', '/')
         content = content.replace('°', '^\\circ')
