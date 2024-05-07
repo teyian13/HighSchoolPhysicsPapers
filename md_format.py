@@ -38,15 +38,26 @@ for filename in os.listdir(directory):
         content = content.replace(' ', '')
 
         # 半角➡️全角
-        content = content.replace(',', '，')
-        content = content.replace(';', '；')
-        content = content.replace(':', '：')
-        content = content.replace(' ', '')
-        content = content.replace('．', '。')
-        content = content.replace('“', '"')
-        content = content.replace('”', '"')
-        content = content.replace('(', '（')
-        content = content.replace(')', '）')
+        content = content.translate(str.maketrans({
+            ',': '，',
+            ';': '；',
+            ':': '：',
+            ' ': '',
+            '．': '。',
+            '“': '"',
+            '”': '"',
+            '(': '（',
+            ')': '）'
+        }))
+        # content = content.replace(',', '，')
+        # content = content.replace(';', '；')
+        # content = content.replace(':', '：')
+        # content = content.replace(' ', '')
+        # content = content.replace('．', '。')
+        # content = content.replace('“', '"')
+        # content = content.replace('”', '"')
+        # content = content.replace('(', '（')
+        # content = content.replace(')', '）')
         # 如果冒号的前后都没有汉字，那么就把它改成半角的 
         content = re.sub(r'(?<![^\x00-\xff])：(?![^\x00-\xff])', ':', content)
         # 如果圆括号的前后都没有汉字，那么就把它改成半角的 
