@@ -8,21 +8,6 @@ for filename in os.listdir(directory):
         filepath = os.path.join(directory, filename)
         # 打开文件并读取内容
         with open(filepath, 'r', encoding='utf-8') as md_file:
-            lines = md_file.readlines()
-
-        # 行
-        # 遍历每一行，如果不以阿拉伯数字开头，就进行替换操作
-        for i in range(len(lines)):
-            if not lines[i][0].isdigit():
-                lines[i] = re.sub(r'\$([ABCD]+)\$', r'\1', lines[i])
-
-        # 将修改过的内容写回文件
-        with open(filepath, 'w', encoding='utf-8') as md_file:
-            md_file.writelines(lines)
-
-        # 全文
-        # 打开文件并读取内容
-        with open(filepath, 'r', encoding='utf-8') as md_file:
             content = md_file.read()
 
         # 选择填空 ____
@@ -37,6 +22,7 @@ for filename in os.listdir(directory):
         # 去除空格
         content = content.replace(' ', '')
 
+        content = re.sub(r'(?<![^\W\d_])\$([ABCD]+)\$(?![^\W\d_])', r'\1', content)
         # 半角➡️全角
         content = content.translate(str.maketrans({
             ',': '，',
