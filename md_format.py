@@ -45,8 +45,14 @@ for filename in os.listdir(directory):
         content = content.replace('．', '。')
         content = content.replace('“', '"')
         content = content.replace('”', '"')
+        content = content.replace('(', '（')
+        content = content.replace(')', '）')
         # 如果冒号的前后都没有汉字，那么就把它改成半角的 
         content = re.sub(r'(?<![^\x00-\xff])：(?![^\x00-\xff])', ':', content)
+        # 如果圆括号的前后都没有汉字，那么就把它改成半角的 
+        content = re.sub(r'(?<![^\x00-\xff])（(?![^\x00-\xff])', '(', content)
+        content = re.sub(r'(?<![^\x00-\xff])）(?![^\x00-\xff])', ')', content)
+
 
         # 全角➡️半角
         content = content.replace('１', '1')
