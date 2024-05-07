@@ -6,7 +6,21 @@ directory = '高考备考/高考真题/2023/'
 for filename in os.listdir(directory):
     if filename.endswith('.md'):
         filepath = os.path.join(directory, filename)
-        
+        # 打开文件并读取内容
+        with open(filepath, 'r', encoding='utf-8') as md_file:
+            lines = md_file.readlines()
+
+        # 行
+        # 遍历每一行，如果不以阿拉伯数字开头，就进行替换操作
+        for i in range(len(lines)):
+            if not lines[i][0].isdigit():
+                lines[i] = re.sub(r'\$([ABCD]+)\$', r'\1', lines[i])
+
+        # 将修改过的内容写回文件
+        with open(filepath, 'w', encoding='utf-8') as md_file:
+            md_file.writelines(lines)
+
+        # 全文
         # 打开文件并读取内容
         with open(filepath, 'r', encoding='utf-8') as md_file:
             content = md_file.read()
@@ -47,7 +61,7 @@ for filename in os.listdir(directory):
         # mathpix
         content = content.replace('\n$\n', '\n$$\n')
         content = content.replace('\\text{', '\\mathrm{')
-        content = re.sub(r'\$([ABCD]+)\$', r'\1', content)
+        # content = re.sub(r'\$([ABCD]+)\$', r'\1', content)
         content = content.replace('Ω', '\Omega')
         content = content.replace('\mathrm{/}', '/')
         content = content.replace('°', '^\\circ')
