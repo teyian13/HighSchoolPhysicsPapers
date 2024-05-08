@@ -10,18 +10,9 @@ for filename in os.listdir(directory):
         with open(filepath, 'r', encoding='utf-8') as md_file:
             content = md_file.read()
 
-        # 选择填空 ____
-        content = content.replace('（）', '$(\qquad)$')
-        content = content.replace(' $($ )', '$(\qquad)$')
-        content = content.replace(' ( )', '$(\qquad)$')
-        content = content.replace('（    ）', '$(\qquad)$')
-        content = content.replace('（\n   ）', '$(\qquad)$')
-        content = content.replace('（\n  ）', '$(\qquad)$')
-        content = content.replace('$(\quad)$', '$(\qquad)$')
-
         # 去除空格
         content = content.replace(' ', '')
-
+        # 去除选项前后$
         content = re.sub(r'(?<![^\W\d_])\$([ABCD]+)\$(?![^\W\d_])', r'\1', content)
         # 半角➡️全角
         content = content.translate(str.maketrans({
@@ -35,15 +26,7 @@ for filename in os.listdir(directory):
             '(': '（',
             ')': '）'
         }))
-        # content = content.replace(',', '，')
-        # content = content.replace(';', '；')
-        # content = content.replace(':', '：')
-        # content = content.replace(' ', '')
-        # content = content.replace('．', '。')
-        # content = content.replace('“', '"')
-        # content = content.replace('”', '"')
-        # content = content.replace('(', '（')
-        # content = content.replace(')', '）')
+
         # 如果冒号的前后都没有汉字，那么就把它改成半角的 
         content = re.sub(r'(?<![^\x00-\xff])：(?![^\x00-\xff])', ':', content)
         # 如果圆括号的前后都没有汉字，那么就把它改成半角的 
@@ -58,6 +41,14 @@ for filename in os.listdir(directory):
         content = content.replace('４', '4')
         content = content.replace('５', '5')
 
+        # 选择填空 ____
+        content = content.replace('（）', '$(\qquad)$')
+        content = content.replace(' $($ )', '$(\qquad)$')
+        content = content.replace(' ( )', '$(\qquad)$')
+        content = content.replace('（    ）', '$(\qquad)$')
+        content = content.replace('（\n   ）', '$(\qquad)$')
+        content = content.replace('（\n  ）', '$(\qquad)$')
+        content = content.replace('$(\quad)$', '$(\qquad)$')
         # mathpix
         content = content.replace('\n$\n', '\n$$\n')
         content = content.replace('\\text{', '\\mathrm{')
@@ -103,12 +94,12 @@ for filename in os.listdir(directory):
         # 注意，此处的 "\n" 其实是为了匹配上一题的结束，所以我们要保留它，即替换为 "\n\n" （两个换行符）
         content = re.sub(r'(\n)(\d{1,2}\. )', r'\n\1\2', content)
 
-        content = re.sub(r'^\s*[\w\s]*。\s*', lambda m: m.group().replace('。', '.'), content, flags=re.M)  
+        # content = re.sub(r'^\s*[\w\s]*。\s*', lambda m: m.group().replace('。', '.'), content, flags=re.M)  
 
         content = content.replace('.png)\nB.', '.png)B.')
         content = content.replace('.png)\nC.', '.png)C.')
         content = content.replace('.png)\nD.', '.png)D.')
-
+        # 单位前加空格
         content = content.replace('mathrm{~', 'mathrm{')
         content = content.replace('mathrm{', 'mathrm{~')
 
