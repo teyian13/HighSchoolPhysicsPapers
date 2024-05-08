@@ -41,25 +41,25 @@ for filename in os.listdir(directory):
             '５': '5'
         }))
 
+        # mathpix
+        content = content.translate(str.maketrans({
+            'Ω': '\\Omega',
+            '°': '^\\circ'
+        }))
+
         # 选择填空 ____
         content = content.replace(' $($ )', '$(\qquad)$')
         content = content.replace(' ( )', '$(\qquad)$')
         content = content.replace('$(\quad)$', '$(\qquad)$')
-        # mathpix
         content = content.replace('\n$\n', '\n$$\n')
         content = content.replace('\\text{', '\\mathrm{')
-        # content = re.sub(r'\$([ABCD]+)\$', r'\1', content)
-        content = content.replace('Ω', '\Omega')
         content = content.replace('\mathrm{/}', '/')
-        content = content.replace('°', '^\\circ')
         content = content.replace('overparen', 'overset{\\frown}')
 
-        # +空格
+        # LaTeX公式+空格
         keywords_for_space_addition = ['\\nu','\\eta','\\cdot', '\\sin', '\\sim', '\\mu', '\\geq', '\\leq', '\\Delta', '\\pi', '\\omega', '\\times', '\\rho', '\\approx', '\\rightarrow', '\\propto','\\triangle','\\angle','\\hline']
-
         for keyword in keywords_for_space_addition:
             content = content.replace(keyword, keyword + ' ')
-
 
         # 空格
         content = content.replace('【解析】', '【解答】')
