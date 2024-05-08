@@ -70,6 +70,7 @@ for filename in os.listdir(directory):
         content = content.replace('\mathrm{/}', '/')
         content = content.replace('°', '^\\circ')
         content = content.replace('overparen', 'overset{\\frown}')
+        content = content.replace('<', '\\leq')
 
         # +空格
         keywords_for_space_addition = ['\\nu','\\eta','\\cdot', '\\sin', '\\sim', '\\mu', '\\geq', '\\leq', '\\Delta', '\\pi', '\\omega', '\\times', '\\rho', '\\approx', '\\rightarrow', '\\propto','\\triangle','\\angle','\\hline']
