@@ -29,25 +29,21 @@ for filename in os.listdir(directory):
 
         # 如果冒号的前后都没有汉字，那么就把它改成半角的 
         content = re.sub(r'(?<![^\x00-\xff])：(?![^\x00-\xff])', ':', content)
-        # 如果圆括号的前后都没有汉字，那么就把它改成半角的 
-        # content = re.sub(r'(?<![^\x00-\xff])（(?![^\x00-\xff])', '(', content)
-        # content = re.sub(r'(?<![^\x00-\xff])）(?![^\x00-\xff])', ')', content)
+        # 匹配全角圆括号且括号内没有中文的子串，做替换，将全角圆括号替换为半角圆括号
         content = re.sub(r'（[^一-龥]*）', lambda m: m.group(0).replace('（', '(').replace('）', ')'), content)
 
         # 全角➡️半角
-        content = content.replace('１', '1')
-        content = content.replace('２', '2')
-        content = content.replace('３', '3')
-        content = content.replace('４', '4')
-        content = content.replace('５', '5')
+        content = content.translate(str.maketrans({
+            '１': '1',
+            '２': '2',
+            '３': '3',
+            '４': '4',
+            '５': '5'
+        }))
 
         # 选择填空 ____
-        content = content.replace('（）', '$(\qquad)$')
         content = content.replace(' $($ )', '$(\qquad)$')
         content = content.replace(' ( )', '$(\qquad)$')
-        content = content.replace('（    ）', '$(\qquad)$')
-        content = content.replace('（\n   ）', '$(\qquad)$')
-        content = content.replace('（\n  ）', '$(\qquad)$')
         content = content.replace('$(\quad)$', '$(\qquad)$')
         # mathpix
         content = content.replace('\n$\n', '\n$$\n')
@@ -81,8 +77,11 @@ for filename in os.listdir(directory):
         content = content.replace('。故选：', '。\n故选：')
         content = content.replace('；故选：', '。\n故选：')
 
-
+        # $$公式前后加空格
         content = re.sub(r"\$.*?\$", lambda x: ' ' + x.group() + ' ', content)
+        # 单位前加空格
+        content = content.replace('mathrm{~', 'mathrm{')
+        content = content.replace('mathrm{', 'mathrm{~')
 
         # 仅在行首题号后添加空格
         # '^' 代表行首， '\d{1,2}' 匹配1到2位的数字
@@ -91,28 +90,13 @@ for filename in os.listdir(directory):
         content = re.sub(r'\$ $', '$', content, flags=re.MULTILINE)
 
         # 在每两道题之间添加空行
-        # 注意，此处的 "\n" 其实是为了匹配上一题的结束，所以我们要保留它，即替换为 "\n\n" （两个换行符）
         content = re.sub(r'(\n)(\d{1,2}\. )', r'\n\1\2', content)
 
         # content = re.sub(r'^\s*[\w\s]*。\s*', lambda m: m.group().replace('。', '.'), content, flags=re.M)  
 
-        content = content.replace('.png)\nB.', '.png)B.')
-        content = content.replace('.png)\nC.', '.png)C.')
-        content = content.replace('.png)\nD.', '.png)D.')
-        # 单位前加空格
-        content = content.replace('mathrm{~', 'mathrm{')
-        content = content.replace('mathrm{', 'mathrm{~')
-
-        
-        # 
-        content = content.replace('试卷(等级性)', '试卷（等级性）')
-        content = content.replace('试卷(选择性)', '试卷（选择性）')
-        content = content.replace('试卷(甲卷)', '试卷（甲卷）')
-        content = content.replace('试卷(乙卷)', '试卷（乙卷）')
-        content = content.replace('试卷(新课标)', '试卷（新课标）')
+        # 两个空格➡️一个空格
         content = content.replace('  ', ' ')
 
-        
         # 把处理后的字符串写回文件
         with open(filepath, 'w', encoding='utf-8') as md_file:
             md_file.write(content)
