@@ -31,7 +31,8 @@ for filename in os.listdir(directory):
         content = re.sub(r'(?<![^\x00-\xff])：(?![^\x00-\xff])', ':', content)
         # 匹配全角圆括号且括号内没有中文的子串，做替换，将全角圆括号替换为半角圆括号
         content = re.sub(r'（[^一-龥]*）', lambda m: m.group(0).replace('（', '(').replace('）', ')'), content)
-
+        # 括号移动到$$里面
+        content = re.sub(r'\(\$([abcdefghigklmn])\$\)', '$(\g<1>)$', content)
         # 全角➡️半角
         content = content.translate(str.maketrans({
             '１': '1',
@@ -47,7 +48,7 @@ for filename in os.listdir(directory):
             '°': '^\\circ',
         }))
 
-        content = re.sub(r'\(\$([abcdefghigklmn])\$\)', '$(\g<1>)$', content)
+
         # 选择填空 ____
         content = content.replace(' $($ )', '$(\qquad)$')
         content = content.replace(' ( )', '$(\qquad)$')
