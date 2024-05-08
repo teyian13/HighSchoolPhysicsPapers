@@ -44,9 +44,10 @@ for filename in os.listdir(directory):
         # mathpix
         content = content.translate(str.maketrans({
             'Ω': '\\Omega',
-            '°': '^\\circ'
+            '°': '^\\circ',
         }))
 
+        content = re.sub(r'\(\$([abcdefghigklmn])\$\)', '$(\g<1>)$', content)
         # 选择填空 ____
         content = content.replace(' $($ )', '$(\qquad)$')
         content = content.replace(' ( )', '$(\qquad)$')
