@@ -45,6 +45,7 @@ for filename in os.listdir(directory):
         # mathpix
         content = content.translate(str.maketrans({
             'Ω': '\\Omega',
+            'α': '\\alpha',
             '°': '^\\circ',
         }))
 
