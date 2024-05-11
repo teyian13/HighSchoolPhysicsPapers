@@ -52,7 +52,7 @@ for filename in os.listdir(directory):
 
         # 选择填空 ____
         content = content.replace(' $($ )', '$(\qquad)$')
-        content = content.replace(' ( )', '$(\qquad)$')
+        content = content.replace('()', '$(\qquad)$')
         content = content.replace('$(\quad)$', '$(\qquad)$')
         content = content.replace('\n$\n', '\n$$\n')
         content = content.replace('\\text{', '\\mathrm{')
