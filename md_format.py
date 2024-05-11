@@ -85,7 +85,9 @@ for filename in os.listdir(directory):
         # 单位前加空格
         content = content.replace('mathrm{~', 'mathrm{')
         content = content.replace('mathrm{', 'mathrm{~')
-
+        # 行间公式➡️
+        content = content.replace('\\[\n', '$')
+        content = content.replace('\n\\]', '$')
         # 仅在行首题号后添加空格
         # '^' 代表行首， '\d{1,2}' 匹配1到2位的数字
         content = re.sub(r'^(\d{1,2}\.)', r'\1 ', content, flags=re.MULTILINE)
