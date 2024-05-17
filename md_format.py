@@ -49,7 +49,6 @@ for filename in os.listdir(directory):
             '°': '^\\circ',
         }))
 
-
         # 选择填空 ____
         content = content.replace(' $($ )', '$(\qquad)$')
         content = content.replace('()', '$(\qquad)$')
@@ -85,6 +84,8 @@ for filename in os.listdir(directory):
         # 单位前加空格
         content = content.replace('mathrm{~', 'mathrm{')
         content = content.replace('mathrm{', 'mathrm{~')
+        content = content.replace('\mathrm{~m}/\mathrm{~s}', '\mathrm{~m/s}')
+
         # 行间公式➡️
         content = content.replace('\\[\n', '$')
         content = content.replace('\n\\]', '$')
